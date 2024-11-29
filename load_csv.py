@@ -4,6 +4,7 @@ class dataset():
     def __init__(self):
         self.path = "dataset_ac/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
+        self.cleaned = False
     def set_path(self,new_path):
         self.path = new_path
     def get_path(self):
@@ -14,7 +15,7 @@ class dataset():
         self.dataset = df
 
     def clear_dataset(self):
-        self.dataset.dropna()
+        self.dataset.dropna(inplace=True)
         user_counts = self.dataset['user_id'].value_counts()
         product_counts = self.dataset['item_id'].value_counts()
 
@@ -29,34 +30,36 @@ class dataset():
 
         self.dataset['user_id_encoded'] = user_encoder.fit_transform(self.dataset['user_id'])
         self.dataset['item_id_encoded'] = product_encoder.fit_transform(self.dataset['item_id'])
+
+        self.cleaned = True
     def get_users(self):
-        try:
-            if not(self.dataset['user_id_encoded']):
-                print('Please clean the dataset first')
-                return
-            return self.dataset['user_id']
-        except:
-            if self.dataset.empty:
-                print('Load a dataset first')
-            print('An error has occurred')
+        if self.dataset.empty:
+            print('Load a dataset first')
+            return None
+        if not self.cleaned:
+            print('Please clean the dataset first')
+            return None
+        return self.dataset['user_id_encoded']
 
     def get_items(self):
-        try:
-            if not(self.dataset['item_id_encoded']):
-                print('Please clean the dataset first')
-                return
-            return self.dataset['item_id']
-        except:
-            if self.dataset.empty:
-                print('Load a dataset first')
-            print('An error has occurred')
+        if self.dataset.empty:
+            print('Load a dataset first')
+            return None
+        if not self.cleaned:
+            print('Please clean the dataset first')
+            return None
+        return self.dataset['item_id_encoded']
+
     def get_ratings(self):
-        try:
-            return self.dataset['rating']
-        except:
-            if self.dataset.empty:
-                print('Load a dataset first')
-            print('An error has occurred')
+        if self.dataset.empty:
+            print('Load a dataset first')
+            return None
+        if not self.cleaned:
+            print('Please clean the dataset first')
+            return None
+        return self.dataset['rating']
 
     def __str__(self):
-        print(self.dataset.head())
+        if self.dataset.empty:
+            return 'Dataset is empty'
+        return str(self.dataset.head())
