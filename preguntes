@@ -1,0 +1,3 @@
+1. Com carreguem el dataset, amb kaggle i similars o el posem al directori?
+2. Quan carreguem el dataset, quins són els criteris de filtratge?
+    De moment, borrem aquelles usuaris que hagin fet menys de 50 valoracions i aquells items que tinguin menys de 5 valoracions
