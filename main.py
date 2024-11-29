@@ -15,4 +15,8 @@ users = dataset.get_users(df)
 ratings = dataset.get_ratings(df)
 timestamp = dataset.get_timestamp(df)
 
+#dataset.set_threshold(df, 30, 2)
+
+
+
 print(dataset)

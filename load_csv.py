@@ -97,7 +97,6 @@ class dataset():
         self.threshold_1 = int(new_threshold1)
         self.threshold_2 = int(new_threshold2)
 
-
     def __str__(self):
         if self.dataset.empty:
             return 'Dataset is empty'
