@@ -11,6 +11,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 df = pd.read_csv("C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/ratings_Electronics (1).csv", names = ['userId', 'productId', 'ratings', 'timestamp'])
 
+df = df.head(1000)
 print(df.head)
 
 df['userId'] = df['userId'].astype('category').cat.codes
@@ -35,3 +36,9 @@ cross_validate(model, data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
 # Entrenar el modelo en todo el dataset
 trainset = data.build_full_trainset()
 model.fit(trainset)
+
+# Predecir para un usuario y un producto específicos
+user_id = 1  # ID de usuario
+product_id = 2  # ID de producto
+prediction = model.predict(user_id, product_id)
+print(prediction)
