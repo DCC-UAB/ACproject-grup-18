@@ -14,4 +14,4 @@ Comprovar la escalabilitat del nostre model
 
 Mirar per cada model i metrica q utilitzem l'espai total utilitzat i la velocitat de computacó, temps computacionals
 
-MATRIX FACTORIZATION????????
+MATRIX FACTORIZATION?????????
