@@ -1,0 +1,17 @@
+Coses que entenc que s'han de fer;
+
+s'ha de fer recommender systems i provar diferents tècniques per veure quin és el millor mesurant amb
+
+Matriu de confusio de varis mètodes per veure quin es el millor, precision,accruacy,recall i l'altra
+
+Fer user-to-user recommendations, per user-t-user provar amb diferents mesures de similaritat, pearson, cosine i buscar més
+
+Fer també item-based models i fer el mateix q user-to user
+
+Content-based  i tf-idf ???? PREGUNTAR SI ES POSSIBLE SI EL DATASET NO TÉ CONTENT
+
+Comprovar la escalabilitat del nostre model
+
+Mirar per cada model i metrica q utilitzem l'espai total utilitzat i la velocitat de computacó, temps computacionals
+
+MATRIX FACTORIZATION????????
