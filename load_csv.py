@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
-class dataset_reader():
+class dataset():
     def __init__(self):
         self.path = "dataset_ac/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
