@@ -5,12 +5,14 @@ class dataset():
         self.path = "dataset_ac/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
         self.cleaned = False
+        self.threshold_1 = 50
+        self.threshold_2 = 5
 
     def set_path(self, new_path):
         if type(new_path) != str:
             raise TypeError('new_path ha de ser un string')
         if new_path == "default":
-            new_path = self.path
+            return
         self.path = new_path
 
     def get_path(self):
@@ -27,8 +29,8 @@ class dataset():
         product_counts = self.dataset['item_id'].value_counts()
 
         self.dataset = (
-            self.dataset)[(self.dataset['user_id'].isin(user_counts[user_counts >= 50].index)) &
-            (self.dataset['item_id'].isin(product_counts[product_counts >= 5].index))
+            self.dataset)[(self.dataset['user_id'].isin(user_counts[user_counts >= self.threshold_1].index)) &
+            (self.dataset['item_id'].isin(product_counts[product_counts >= self.threshold_2].index))
             ]
 
         # Encode user_id and prod_id
@@ -90,6 +92,11 @@ class dataset():
             print('Please clean the dataset first')
             return None
         return self.dataset['timestamp']
+
+    def set_threshold(self, new_threshold1, new_threshold2):
+        self.threshold_1 = int(new_threshold1)
+        self.threshold_2 = int(new_threshold2)
+
 
     def __str__(self):
         if self.dataset.empty:
