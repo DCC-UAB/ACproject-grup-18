@@ -1,4 +1,5 @@
 from load_csv import dataset
+from split import split
 
 #print('Introduce path: ')
 #print('\n')
@@ -17,6 +18,13 @@ timestamp = dataset.get_timestamp(df)
 
 #dataset.set_threshold(df, 30, 2)
 
+split = split(dataset.get_dataset(df))
+
+train_r, test_r = split.split_random()
+train_p, test_p = split.split_priority()
+
+train_r.head()
 
 
-print(dataset)
+
+#print(dataset)
