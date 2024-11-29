@@ -15,3 +15,4 @@ users = dataset.get_users()
 ratings = dataset.get_ratings()
 timestamp = dataset.get_timestamp()
 
+print(dataset)
