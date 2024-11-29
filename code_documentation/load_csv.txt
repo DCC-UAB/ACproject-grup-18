@@ -42,6 +42,18 @@ Mètodes:
         Els usuaris amb menys de 50 ressenyes i els productes amb menys de 5 ressenyes es descarten.
         Els identificadors d'usuari i producte es codifiquen amb etiquetatge.
 
+    get_dataset_raw(self):
+        Retorna el dataset sense netejar.
+
+        Returns:
+            pd.Dataframe: El dataset sense netejar i carregat.
+
+    get_dataset(self):
+        Retorna el dataset netejat.
+
+        Returns:
+            pd.Dataframe: El dataset netejat i carregat.
+
     get_users(self):
         Retorna la columna 'user_id' codificada.
 

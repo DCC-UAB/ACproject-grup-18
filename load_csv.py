@@ -5,10 +5,15 @@ class dataset():
         self.path = "dataset_ac/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
         self.cleaned = False
-    def set_path(self,new_path):
+
+    def set_path(self, new_path):
+        if type(new_path) != str:
+            raise TypeError('new_path ha de ser un string')
         self.path = new_path
+
     def get_path(self):
         return self.path
+
     def load_dataset(self):
         df = pd.read_csv(self.path)
         df.columns = ["user_id","item_id","rating","timestamp"]
@@ -32,6 +37,22 @@ class dataset():
         self.dataset['item_id_encoded'] = product_encoder.fit_transform(self.dataset['item_id'])
 
         self.cleaned = True
+
+    def get_dataset_raw(self):
+        if self.dataset.empty:
+            print('Load a dataset first')
+            return None
+        return self.dataset
+
+    def get_dataset(self):
+        if self.dataset.empty:
+            print('Load a dataset first')
+            return None
+        if not self.cleaned:
+            print('Please clean the dataset first')
+            return None
+        return self.dataset
+
     def get_users(self):
         if self.dataset.empty:
             print('Load a dataset first')
