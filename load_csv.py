@@ -9,6 +9,8 @@ class dataset():
     def set_path(self, new_path):
         if type(new_path) != str:
             raise TypeError('new_path ha de ser un string')
+        if new_path == "default":
+            new_path = self.path
         self.path = new_path
 
     def get_path(self):
@@ -79,6 +81,15 @@ class dataset():
             print('Please clean the dataset first')
             return None
         return self.dataset['rating']
+
+    def get_timestamp(self):
+        if self.dataset.empty:
+            print('Load a dataset first')
+            return None
+        if not self.cleaned:
+            print('Please clean the dataset first')
+            return None
+        return self.dataset['timestamp']
 
     def __str__(self):
         if self.dataset.empty:
