@@ -1,9 +1,0 @@
-OBJECTIUS PER LA SESSIÓ 2:
-
-Descarregar DATASET
-
-STARTING POINT: -Analitzar dataset, columnes, files... -Filtrar Dataset: -Encarregar-se de columnes problemàtiques o confuses -Valors NULL o 0 -Considerar Normalitzar valors.
-
-Analitzar i processar diferents divisions del dataset en conjunts de test, train i validació
-
-Si hi ha temps, començar a entrenar diferents models amb el dataset.
