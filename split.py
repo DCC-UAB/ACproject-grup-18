@@ -21,7 +21,5 @@ class split():
         filtered_df = self.df[self.df['user_id'].isin(top_users['user_id'])]
 
         train, test = train_test_split(filtered_df, test_size=0.2, random_state=42)
-
-
         return train, test
 
