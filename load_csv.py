@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 class dataset():
     def __init__(self):
-        self.path = "ratings_Electronics.csv"
+        self.path = "/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
         self.cleaned = False
         self.threshold_1 = 50
@@ -37,6 +37,7 @@ class dataset():
         user_encoder = LabelEncoder()
         product_encoder = LabelEncoder()
 
+        #No entenc qq esta lo del Encoder si no ja hi ha id per usuaris i per items
         self.dataset['user_id_encoded'] = user_encoder.fit_transform(self.dataset['user_id'])
         self.dataset['item_id_encoded'] = product_encoder.fit_transform(self.dataset['item_id'])
 

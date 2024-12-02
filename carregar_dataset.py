@@ -3,7 +3,7 @@
 import pandas as pd
 
 #Careguem les dades
-df = pd.read_csv("ratings_Electronics (1).csv",
+df = pd.read_csv("ratings_Electronics.csv",
                              names=['userId', 'productId','rating','timestamp'])
 #Mostrem les primeres 5 linies
 print(df.head)
@@ -44,6 +44,12 @@ duplicados_usuario_producto = df.duplicated(subset=['userId', 'productId'])
 #   Contar cuántas combinaciones duplicadas existen
 total_duplicados_usuario_producto = duplicados_usuario_producto.sum()
 print("Total de combinacions duplicades (usuaris-producte):",total_duplicados_usuario_producto)
+
+#quin és el rating més popular:
+# Check the distribution of the rating
+with sns.axes_style('white'):
+    g = sns.factorplot("Rating", data=electronics_data, aspect=2.0,kind='count')
+    g.set_ylabels("Total number of ratings")
 
 #ENTRENEM UN MODEL Collaborative Filtering (CF) User-to-User
 # Crear una matriz pivote de usuarios y productos
