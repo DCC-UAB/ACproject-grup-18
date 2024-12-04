@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Carreguem les dades
-df = pd.read_csv("C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/Projecte/ratings_Electronics.csv",
+df = pd.read_csv("/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv",
                  names=['userId', 'productId', 'rating', 'timestamp'])
 
 # Mostrem les primeres 5 línies
@@ -56,8 +56,10 @@ plt.xlabel("Rating")
 plt.ylabel("Nombre de ratings")
 plt.show()
 
+data_500 = df[:500]
+print(data_500)
 # Matriu usuari-producte
-user_product_matrix = df.pivot_table(values='rating', index='userId', columns='productId', fill_value=0)
+user_product_matrix = data_500.pivot_table(values='rating', index='userId', columns='productId', fill_value=0)
 print("\nMatriu usuari-producte:")
 print(user_product_matrix.head())
 
