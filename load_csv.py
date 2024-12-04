@@ -2,8 +2,9 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 class dataset():
     #"/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv"
+    #"C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/Projecte/ratings_Electronics.csv"
     def __init__(self):
-        self.path = "/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv"
+        self.path = "C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/Projecte/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
         self.cleaned = False
         self.threshold_1 = 50

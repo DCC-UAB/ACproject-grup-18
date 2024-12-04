@@ -1,64 +1,70 @@
-#Script python dades dataset Amazon Products
-#Importem llibreries
+# Importem llibreries necessàries
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-#Careguem les dades
-df = pd.read_csv("ratings_Electronics.csv",
-                             names=['userId', 'productId','rating','timestamp'])
-#Mostrem les primeres 5 linies
-print(df.head)
+# Carreguem les dades
+df = pd.read_csv("C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/Projecte/ratings_Electronics.csv",
+                 names=['userId', 'productId', 'rating', 'timestamp'])
 
-#Analitzem dades
-#   Dimensió
+# Mostrem les primeres 5 línies
+print("Primeres 5 files del dataset:")
+print(df.head())
+
+# Analitzem les dades
+# Dimensió
 print("Nombre files:", df.shape[0])
-print("Nombre columnes",df.shape[1])
+print("Nombre columnes:", df.shape[1])
 
-#   Hi ha alguna valor null a alguna columna?
-print(df.isnull().sum(), "No hi ha valors nulls") #No hi ha valors nulls
+# Hi ha algun valor null a alguna columna?
+print("\nValors nulls per columna:")
+print(df.isnull().sum())
 
-#Tenen les columnes els valors corresponents de dades?
+# Informació de les columnes
+print("\nTipus de dades:")
 print(df.info())
 
+# Estadístiques dels ratings
+print("\nEstadístiques dels ratings:")
+print("Minimum rating:", df["rating"].min())
+print("Maximum rating:", df["rating"].max())
 
-#   Hi ha alguna fila duplicada? --> 
-#   Hi ha outliers? --> No
-#RATINGS
-#   Els ratings recorren tots els valors possibles? Hi ha algun outlier?
-print('Minimum rating:', df["rating"].min())
-print('Maximum rating:', df["rating"].max())
-
-#Quantitat de valors
+# Quantitat de productes i usuaris únics
 total_productes = df['productId'].nunique()
 total_usuaris = df['userId'].nunique()
+print("\nTotal productes únics:", total_productes)
+print("Total usuaris únics:", total_usuaris)
 
-print("Total productes:", total_productes)
-print("Total usuaris:", total_usuaris)
-
-#Hi ha files duplicades?
+# Files duplicades
 files_duplicades = df[df.duplicated()]
-print("Total files duplicades:",files_duplicades)
-print("No hi ha files duplicades")
+print("\nTotal files duplicades:", len(files_duplicades))
+if len(files_duplicades) > 0:
+    print(files_duplicades.head())
+else:
+    print("No hi ha files duplicades")
 
-#Usuari ha votat més d'un cop el mateix rating?
+# Combinacions duplicades usuari-producte
 duplicados_usuario_producto = df.duplicated(subset=['userId', 'productId'])
-#   Contar cuántas combinaciones duplicadas existen
 total_duplicados_usuario_producto = duplicados_usuario_producto.sum()
-print("Total de combinacions duplicades (usuaris-producte):",total_duplicados_usuario_producto)
+print("\nTotal de combinacions duplicades (usuari-producte):", total_duplicados_usuario_producto)
 
-#quin és el rating més popular:
-# Check the distribution of the rating
-with sns.axes_style('white'):
-    g = sns.factorplot("Rating", data=electronics_data, aspect=2.0,kind='count')
-    g.set_ylabels("Total number of ratings")
+# Distribució dels ratings
+print("\nDistribució dels ratings:")
+sns.countplot(data=df, x="rating", palette="viridis")
+plt.title("Distribució dels ratings")
+plt.xlabel("Rating")
+plt.ylabel("Nombre de ratings")
+plt.show()
 
-#ENTRENEM UN MODEL Collaborative Filtering (CF) User-to-User
-# Crear una matriz pivote de usuarios y productos
-#puede ser que no todos los usuarios hayan votado todo.
-#podemos recomendar
-#tenemos muchas variables y la matriu llegará a ser de 2000015699392 cells es mucho. Recomendable hacer subset?
+# Matriu usuari-producte
 user_product_matrix = df.pivot_table(values='rating', index='userId', columns='productId', fill_value=0)
+print("\nMatriu usuari-producte:")
+print(user_product_matrix.head())
 
-print("MATRIU",user_product_matrix.head())
-
-#Potser podem només agafar els usuaris que tinguin valors significatius en cuant a vot
-
+# Visualització de la matriu pivotada (subset)
+subset_matrix = user_product_matrix.iloc[:10, :10]
+sns.heatmap(subset_matrix, cmap="YlGnBu", annot=True, cbar=True)
+plt.title("Visualització de la matriu pivotada (subset)")
+plt.xlabel("ProductId")
+plt.ylabel("UserId")
+plt.show()
