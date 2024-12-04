@@ -8,4 +8,4 @@
 7. Quins són els millors recomanadors?
 8. Entenc que amb el dataset que tenim, no podem fer CB?
 9. Quins mètodes són més representatius per Evaluar els models?
-10. Com podem comprovar que les recomanacions que fa el nostre sistema avaluador són correctas?
+10. Com podem comprovar que les recomanacions que fa el nostre sistema avaluador són correctes?
