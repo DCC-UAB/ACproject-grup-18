@@ -1,5 +1,9 @@
 from load_csv import Dataset
 from split import split_random, split_priority, train_test_split
+from surprise import Dataset, Reader
+from surprise import KNNBasic
+from surprise.model_selection import train_test_split
+from surprise import accuracy
 
 #print('Introduce path: ')
 #print('\n')
@@ -70,7 +74,19 @@ df_13 = user_item_matrix_filtered.sample(frac=1/3, random_state=42)
  #      1. Dividim train i test 80/20
 train, test = train_test_split(df_13, test_size=0.2, random_state=42)
 print("Mida train",train.shape)
-train_similarity = train.corr(method='pearson')
+
+
+sim_options = {
+    "name": "cosine",  # Similaridad coseno
+    "user_based": True,  # Filtrado colaborativo basado en usuarios
+}
+
+model = KNNBasic(sim_options=sim_options)
+model.fit(train)
+
+# Hacer predicciones
+predictions = model.test(test)
+print(predictions)
 
 
 
@@ -101,3 +117,4 @@ print(user_similarity_train_pearson.head())
 #filtrar usuario que más se parece
 #predecir ratings
 #evaluar modelo
+
