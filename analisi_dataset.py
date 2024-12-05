@@ -2,7 +2,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+##Falta df.describe
 # Carreguem les dades
 df = pd.read_csv("/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv",
                  names=['userId', 'productId', 'rating', 'timestamp'])

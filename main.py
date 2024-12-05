@@ -53,6 +53,11 @@ user_item_matrix_filtered = user_item_matrix_filtered_rows[valid_items]
 # Ver el resultado
 print(user_item_matrix_filtered.shape)  # Dimensiones de la matriz filtrada
 
+####500#### users (com que després de filtrar només ens queden 1320 usuaris agafem una tercera part)
+df_13 = user_item_matrix_filtered.sample(frac=1/3, random_state=42)
+ #      1. Dividim train i test 80/20
+train, test = train_test_split(df_13, test_size=0.2, random_state=42)
+ 
 
 
 
