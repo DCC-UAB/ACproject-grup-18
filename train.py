@@ -9,7 +9,7 @@ from sklearn.preprocessing import Normalizer, StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix, recall_score, precision_score, roc_curve, roc_auc_score
 from sklearn.neighbors import KNeighborsClassifier
 
-df = pd.read_csv("C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/ratings_Electronics (1).csv", names = ['userId', 'productId', 'ratings', 'timestamp'])
+"""df = pd.read_csv("C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/ratings_Electronics (1).csv", names = ['userId', 'productId', 'ratings', 'timestamp'])
 
 df = df.head(1000)
 print(df.head)
@@ -41,14 +41,13 @@ model.fit(trainset)
 user_id = 1  # ID de usuario
 product_id = 2  # ID de producto
 prediction = model.predict(user_id, product_id)
-print(prediction)
+print(prediction)"""
 
 
-from load_csv import dataset
+from load_csv import Dataset
 from split import split_random, split_priority, train_test_split
 
-df = dataset()
-
+df = Dataset()
 df.load_dataset()
 df.clear_dataset()
 dataset_ = df.get_dataset()
@@ -66,5 +65,31 @@ valid_items = non_zero_counts_columns[non_zero_counts_columns >= 5].index
 # Filtrar la matriz para mantener solo los productos válidos
 user_item_matrix_filtered = user_item_matrix_filtered_rows[valid_items]
 
-# Ver el resultado
-print(user_item_matrix_filtered.shape)  # Dimensiones de la matriz filtrada
+print(user_item_matrix_filtered.shape)
+
+
+from surprise.model_selection import train_test_split
+from surprise import SVD, Dataset, Reader
+
+# Crear un dataset en formato Surprise
+reader = Reader(rating_scale=(0, 5))  # Ajustar rango según tu dataset
+filtered_ratings = user_item_matrix_filtered.stack().reset_index()
+filtered_ratings.columns = ['user_id', 'item_id', 'rating']
+
+data = Dataset.load_from_df(filtered_ratings[['user_id', 'item_id', 'rating']], reader)
+
+# Dividir el dataset en entrenamiento y prueba (80%/20%)
+trainset, testset = train_test_split(data, test_size=0.2)
+
+# Crear y entrenar el modelo
+model = SVD()
+model.fit(trainset)
+
+# Evaluar el modelo en el conjunto de prueba
+from surprise import accuracy
+predictions = model.test(testset)
+
+# Calcular RMSE
+rmse = accuracy.rmse(predictions)
+print(f"RMSE: {rmse}")
+
