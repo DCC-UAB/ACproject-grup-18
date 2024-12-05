@@ -1,4 +1,4 @@
-from load_csv import dataset
+from load_csv import Dataset
 from split import split_random, split_priority, train_test_split
 
 #print('Introduce path: ')
@@ -6,7 +6,7 @@ from split import split_random, split_priority, train_test_split
 #print("(type 'default' for predetermined path)")
 #path = input("Introduce path:")
 
-df = dataset()
+df = Dataset()
 
 df.load_dataset()
 print("aaa",df.dataset.shape)
