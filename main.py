@@ -12,10 +12,22 @@ df.load_dataset()
 print("aaa",df.dataset.shape)
 df.clear_dataset()
 
+
+
+
+
 dataset_ = df.get_dataset()
 print("gfgf",dataset_.shape)
 num_unique_users = dataset_['user_id'].nunique()
 print(f"Usuarios únicos: {num_unique_users}")
+
+"""dataset_ = df.get_dataset()
+
+no_of_rated_products_per_user = dataset_.groupby(by='user_id')['rating'].count().sort_values(ascending=False)
+no_of_rated_products_per_user.head()
+
+
+print("/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n")"""
 
 # Contar ítems únicos
 num_unique_items = dataset_['item_id'].nunique()

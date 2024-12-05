@@ -4,7 +4,7 @@ class dataset():
     #"/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv"
     #"C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/Projecte/ratings_Electronics.csv"
     def __init__(self):
-        self.path = "/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv"
+        self.path = "C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/Projecte/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
         self.cleaned = False
         self.threshold_1 = 50
@@ -55,9 +55,9 @@ class dataset():
         if self.dataset.empty:
             print('Load a dataset first')
             return None
-        if not self.cleaned:
+        """if not self.cleaned:
             print('Please clean the dataset first')
-            return None
+            return None"""
         return self.dataset
 
     def get_users(self):
