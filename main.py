@@ -76,6 +76,8 @@ train_similarity = train.corr(method='pearson')
 
 
 
+
+
 #USER-TO-USER
 #dataset amb 500
 print(type(dataset_))
