@@ -1,9 +1,7 @@
 from load_csv import Dataset
 from split import split_random, split_priority, train_test_split
-from surprise import Dataset, Reader
-from surprise import KNNBasic
-from surprise.model_selection import train_test_split
-from surprise import accuracy
+from surprise import KNNBasic, accuracy
+import pandas as pd
 
 #print('Introduce path: ')
 #print('\n')
@@ -11,9 +9,7 @@ from surprise import accuracy
 #path = input("Introduce path:")
 
 df = Dataset()
-
 df.load_dataset()
-print("aaa",df.dataset.shape)
 df.clear_dataset()
 
 
@@ -76,17 +72,50 @@ train, test = train_test_split(df_13, test_size=0.2, random_state=42)
 print("Mida train",train.shape)
 
 
-sim_options = {
-    "name": "cosine",  # Similaridad coseno
-    "user_based": True,  # Filtrado colaborativo basado en usuarios
-}
 
+
+
+
+import pandas as pd
+from surprise import Dataset, Reader
+
+# Supongamos que user_item_matrix es tu matriz de usuarios e ítems
+user_item_matrix = user_item_matrix_filtered  # Esta es tu matriz filtrada de usuarios e ítems
+
+# Convertir la matriz a formato "long" (user_id, item_id, rating)
+long_format_df = user_item_matrix.stack().reset_index()
+long_format_df.columns = ['user_id', 'item_id', 'rating']
+
+# Mostrar un ejemplo de la transformación
+print(long_format_df.head())
+
+# Definir el formato de lectura para Surprise
+reader = Reader(rating_scale=(1, 5))  # Asegúrate de que el rating_scale coincide con los valores que usas
+
+# Cargar el dataframe a Surprise
+data = Dataset.load_from_df(long_format_df[['user_id', 'item_id', 'rating']], reader)
+
+# Ahora puedes usar data con los modelos de Surprise
+
+
+from surprise import KNNBasic
+from surprise import accuracy
+
+# Dividir los datos en conjunto de entrenamiento y prueba
+trainset = data.build_full_trainset()
+testset = trainset.build_testset()  # Puedes ajustar la prueba según lo que necesites (por ejemplo, validación cruzada)
+
+# Crear el modelo KNN basado en usuarios
+sim_options = {'name': 'cosine', 'user_based': True}
 model = KNNBasic(sim_options=sim_options)
-model.fit(train)
+model.fit(trainset)
 
 # Hacer predicciones
-predictions = model.test(test)
-print(predictions)
+predictions = model.test(testset)
+
+# Evaluar el modelo con RMSE
+print("RMSE:", accuracy.rmse(predictions))
+
 
 
 
