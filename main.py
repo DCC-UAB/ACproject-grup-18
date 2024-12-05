@@ -69,7 +69,9 @@ print(user_item_matrix_filtered.shape)  # Dimensiones de la matriz filtrada
 df_13 = user_item_matrix_filtered.sample(frac=1/3, random_state=42)
  #      1. Dividim train i test 80/20
 train, test = train_test_split(df_13, test_size=0.2, random_state=42)
- 
+print("Mida train",train.shape)
+train_similarity = train.corr(method='pearson')
+
 
 
 
