@@ -2,6 +2,7 @@ from load_csv import Dataset
 from split import split_random, split_priority, train_test_split
 from surprise import KNNBasic, accuracy
 import pandas as pd
+import numpy as np
 
 #print('Introduce path: ')
 #print('\n')
@@ -17,29 +18,29 @@ df.clear_dataset()
 
 
 dataset_ = df.get_dataset()
-print("gfgf",dataset_.shape)
-num_unique_users = dataset_['user_id'].nunique()
-print(f"Usuarios únicos: {num_unique_users}")
-
-"""dataset_ = df.get_dataset()
-
-no_of_rated_products_per_user = dataset_.groupby(by='user_id')['rating'].count().sort_values(ascending=False)
-no_of_rated_products_per_user.head()
+dataset_=dataset_.groupby("user_id").filter(lambda x:x['rating'].count() >=50)
 
 
-print("/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n")"""
+print("SHAPE OF DATASET:", dataset_.shape)
+print("Usuaris únics:", dataset_['user_id'].nunique())
+print(f"Ítems únicos: {dataset_['item_id'].nunique()}")
 
-# Contar ítems únicos
-num_unique_items = dataset_['item_id'].nunique()
-print(f"Ítems únicos: {num_unique_items}")
 
-'''user_item_matrix = dataset_.pivot_table(values='rating', index='user_id', columns='item_id', fill_value=0)
-non_zero_counts = user_item_matrix.apply(lambda row: (row != 0).sum(), axis=1)
-print(non_zero_counts.shape)
-non_zero_counts = non_zero_counts[non_zero_counts>=50]
-print(non_zero_counts.shape)
-print(user_item_matrix.head())'''
+"""
+self.dataset.dropna(inplace=True)
+        user_counts = self.dataset['user_id'].value_counts()
+        product_counts = self.dataset['item_id'].value_counts()
 
+        self.dataset = (self.dataset)[(self.dataset['user_id'].isin(user_counts[user_counts >= self.threshold_1].index)) &
+                        (self.dataset['item_id'].isin(product_counts[product_counts >= self.threshold_2].index))]
+
+
+user_item_matrix = dataset_.pivot_table(values='rating', index='user_id', columns='item_id', fill_value=0)
+#non_zero_counts = user_item_matrix.apply(lambda row: (row != 0).sum(), axis=1)
+#print(non_zero_counts.shape)
+#non_zero_counts = non_zero_counts[non_zero_counts>=50]
+#print(non_zero_counts.shape)
+#print(user_item_matrix.head())
 
 # Crear la matriz usuario-item (ya lo has hecho)
 user_item_matrix = dataset_.pivot_table(values='rating', index='user_id', columns='item_id', fill_value=0)
@@ -97,8 +98,8 @@ data = Dataset.load_from_df(long_format_df[['user_id', 'item_id', 'rating']], re
 
 # Ahora puedes usar data con los modelos de Surprise
 
-
-from surprise import KNNBasic
+"""
+"""from surprise import KNNBasic
 from surprise import accuracy
 
 # Dividir los datos en conjunto de entrenamiento y prueba
@@ -145,5 +146,5 @@ user_similarity_train_pearson = user_item_matrix2.corr(method='pearson')
 print(user_similarity_train_pearson.head())
 #filtrar usuario que más se parece
 #predecir ratings
-#evaluar modelo
+#evaluar modelo"""
 

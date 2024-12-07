@@ -24,12 +24,14 @@ class Dataset():
         print("Error: File not found in all specified paths.")
 
     def clear_dataset(self):
-        self.dataset.dropna(inplace=True)
         user_counts = self.dataset['user_id'].value_counts()
-        product_counts = self.dataset['item_id'].value_counts()
+        valid_users = user_counts[user_counts >= self.threshold_1].index
+        self.dataset = self.dataset[self.dataset['user_id'].isin(valid_users)]
 
-        self.dataset = (self.dataset)[(self.dataset['user_id'].isin(user_counts[user_counts >= self.threshold_1].index)) &
-                        (self.dataset['item_id'].isin(product_counts[product_counts >= self.threshold_2].index))]
+        item_counts = self.dataset['item_id'].value_counts()
+        valid_items = item_counts[item_counts >= self.threshold_2].index
+        self.dataset = self.dataset[self.dataset['item_id'].isin(valid_items)]
+
         self.cleaned = True
 
     def get_dataset_raw(self):
@@ -42,9 +44,9 @@ class Dataset():
         if self.dataset.empty:
             print('Load a dataset first')
             return None
-        """if not self.cleaned:
+        if not self.cleaned:
             print('Please clean the dataset first')
-            return None"""
+            return None
         return self.dataset
 
     def get_users(self):
