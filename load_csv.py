@@ -13,7 +13,6 @@ class Dataset():
     def load_dataset(self):
         for path in [self.path_1, self.path_2, self.path_3]:
             try:
-                print(f"Trying to load data from: {path}")
                 df = pd.read_csv(path)
                 df.columns = ["user_id", "item_id", "rating", "timestamp"]
                 self.dataset = df
@@ -24,21 +23,15 @@ class Dataset():
         print("Error: File not found in all specified paths.")
 
     def clear_dataset(self):
-        user_counts = self.dataset['user_id'].value_counts()
+        """user_counts = self.dataset['user_id'].value_counts()
         valid_users = user_counts[user_counts >= self.threshold_1].index
         self.dataset = self.dataset[self.dataset['user_id'].isin(valid_users)]
 
         item_counts = self.dataset['item_id'].value_counts()
         valid_items = item_counts[item_counts >= self.threshold_2].index
-        self.dataset = self.dataset[self.dataset['item_id'].isin(valid_items)]
+        self.dataset = self.dataset[self.dataset['item_id'].isin(valid_items)]"""
 
         self.cleaned = True
-
-    def get_dataset_raw(self):
-        if self.dataset.empty:
-            print('Load a dataset first')
-            return None
-        return self.dataset
 
     def get_dataset(self):
         if self.dataset.empty:
@@ -84,10 +77,6 @@ class Dataset():
             print('Please clean the dataset first')
             return None
         return self.dataset['timestamp']
-
-    def set_threshold(self, new_threshold1, new_threshold2):
-        self.threshold_1 = int(new_threshold1)
-        self.threshold_2 = int(new_threshold2)
 
     def __str__(self):
         if self.dataset.empty:
