@@ -4,7 +4,7 @@ class Dataset():
     def __init__(self):
         self.path_1 = "/Users/lauragispertcortes/Documents/UAB/3 curs/1s/Aprenetatge computacional/Projecte/ratings_Electronics.csv"
         self.path_2 = "C:/Users/Joel/Documents/UAB/Tercer/Primer_Semestre/AC - Aprenentatge Computacional/Projecte/ratings_Electronics.csv"
-        self.path_3 = "path_guillem"
+        self.path_3 = "C:/Users/guill/Downloads/ratings_Electronics.csv"
         self.dataset = pd.DataFrame()
         self.cleaned = False
         self.threshold_1 = 50
