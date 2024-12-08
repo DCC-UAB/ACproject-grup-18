@@ -1,0 +1,79 @@
+Class: dataset
+
+Classe per gestionar i processar un dataset de valoracions de productes.
+
+Aquesta classe permet carregar, netejar i codificar un conjunt de dades que conté informació sobre les valoracions d'usuaris en productes.
+També proporciona mètodes per obtenir les dades processades com els identificadors d'usuaris i productes, així com les valoracions.
+
+Atributs:
+    path (str): El camí al fitxer CSV que conté les dades.
+    dataset (pd.DataFrame): El DataFrame que conté el dataset carregat.
+    cleaned (bool): Indica si el dataset ha estat netejat i processat.
+
+Mètodes:
+
+    __init__(self):
+        Inicialitza la classe `dataset`.
+
+        Per defecte, el camí al dataset és 'dataset_ac/ratings_Electronics.csv'.
+        El dataset es carrega com un DataFrame buit i la bandera de neteja es marca com a `False`.
+
+    set_path(self, new_path):
+        Assigna un nou camí al fitxer de dades.
+
+        Arguments:
+            new_path (str): El nou camí al fitxer CSV.
+
+    get_path(self):
+        Retorna el camí actual del fitxer de dades.
+
+        Returns:
+            str: El camí al fitxer de dades.
+
+    load_dataset(self):
+        Carrega el dataset des del camí especificat en `self.path`.
+
+        L'arxiu CSV ha de tenir les columnes "user_id", "item_id", "rating" i "timestamp".
+        Aquesta funció carrega les dades i assigna els noms de les columnes al DataFrame.
+
+    clear_dataset(self):
+        Neteja el dataset eliminant les files amb valors nuls i filtrant usuaris i productes poc freqüents.
+
+        Els usuaris amb menys de 50 ressenyes i els productes amb menys de 5 ressenyes es descarten.
+        Els identificadors d'usuari i producte es codifiquen amb etiquetatge.
+
+    get_dataset_raw(self):
+        Retorna el dataset sense netejar.
+
+        Returns:
+            pd.Dataframe: El dataset sense netejar i carregat.
+
+    get_dataset(self):
+        Retorna el dataset netejat.
+
+        Returns:
+            pd.Dataframe: El dataset netejat i carregat.
+
+    get_users(self):
+        Retorna la columna 'user_id' codificada.
+
+        Returns:
+            pd.Series: La columna amb els identificadors d'usuari codificats.
+
+    get_items(self):
+        Retorna la columna 'item_id' codificada.
+
+        Returns:
+            pd.Series: La columna amb els identificadors de producte codificats.
+
+    get_ratings(self):
+        Retorna la columna de valoracions 'rating'.
+
+        Returns:
+            pd.Series: La columna amb les valoracions.
+
+    __str__(self):
+        Retorna una representació del dataset per a una visió ràpida.
+
+        Returns:
+            str: Els primers 5 registres del dataset.
