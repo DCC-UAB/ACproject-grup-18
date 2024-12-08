@@ -23,13 +23,13 @@ class Dataset():
         print("Error: File not found in all specified paths.")
 
     def clear_dataset(self):
-        """user_counts = self.dataset['user_id'].value_counts()
+        user_counts = self.dataset['user_id'].value_counts()
         valid_users = user_counts[user_counts >= self.threshold_1].index
         self.dataset = self.dataset[self.dataset['user_id'].isin(valid_users)]
 
         item_counts = self.dataset['item_id'].value_counts()
         valid_items = item_counts[item_counts >= self.threshold_2].index
-        self.dataset = self.dataset[self.dataset['item_id'].isin(valid_items)]"""
+        self.dataset = self.dataset[self.dataset['item_id'].isin(valid_items)]
 
         self.cleaned = True
 
