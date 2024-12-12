@@ -1,42 +1,63 @@
-from load_csv import Dataset
-import numpy as np
+from load_csv import dataset
+from surprise import Dataset,Reader
+from surprise import KNNBasic
+from surprise.model_selection import train_test_split
+from surprise import accuracy
 
-df = Dataset()
+
+
+df = dataset()
 df.load_dataset()
 df.clear_dataset()
 
 dataset = df.get_dataset()
 
-def predict_rating(target_item, user_item_matrix, similarity_matrix):
-    target_ratings = user_item_matrix.loc[target_item]
 
-    rated_users = user_item_matrix.columns[target_ratings > 0]
+reader = Reader(rating_scale=(0, 5))
+dataset1 = Dataset.load_from_df(dataset[['user_id', 'item_id', 'rating']], reader)
 
-    columnes = user_item_matrix[rated_users]
-    rated_items = columnes.loc[(columnes != 0).any(axis=1)].index
+train, test = train_test_split(dataset1, test_size=0.2)
 
-    if target_item not in similarity_matrix.index:
-        return 0
+sim_options = {
+    "name": "cosine",  # Mètrica de similitud (també pot ser 'pearson')
+    "user_based": False  # False indica que és item-to-item
+}
 
-    similarities = similarity_matrix.loc[target_item, rated_items]
-    rated_values = user_item_matrix.loc[rated_items]
+model = KNNBasic(sim_options=sim_options)
 
-    weighted_sum = np.dot(similarities, rated_values).sum()
-    sum_of_weights = np.abs(similarities).sum()
+# Entrenar el model
+model.fit(train)
 
-    if sum_of_weights == 0:
-        return 0
+# Predir sobre el conjunt de test
+prediccions = model.test(test)
 
-    return weighted_sum / sum_of_weights
+# Avaluar el model
+rmse = accuracy.rmse(prediccions)
+print(f"RMSE del model: {rmse}")
 
-#ITEM-TO-ITEM
 
-ratings = dataset[:5000]
+def recomana_items(usuari_id, model, trainset, top_n=3):
+    # Obtenir tots els items del dataset
+    item_ids = trainset.all_items()
+    items = [trainset.to_raw_iid(i) for i in item_ids]
 
-item_user_matrix_train = ratings.pivot_table(values='rating', index='item_id', columns='user_id', fill_value=0)
-item_similarity_pearson = item_user_matrix_train.T.corr(method='pearson')
-target_item = item_user_matrix_train.index[0]
+    # Obtenir els items ja puntuats per l'usuari
+    puntuacions_usuari = trainset.ur[trainset.to_inner_uid(usuari_id)]
+    items_puntuats = [trainset.to_raw_iid(iid) for (iid, _) in puntuacions_usuari]
 
-predicted_rating = predict_rating(target_item, item_user_matrix_train, item_similarity_pearson)
+    # Generar prediccions per a items no puntuats
+    recomanacions = []
+    for item in items:
+        if item not in items_puntuats:
+            prediccio = model.predict(usuari_id, item)
+            recomanacions.append((item, prediccio.est))
 
-print(f"Valoració predita per l'ítem {target_item}: {predicted_rating}")
+    # Retornar els top N items
+    recomanacions = sorted(recomanacions, key=lambda x: x[1], reverse=True)
+    return recomanacions[:top_n]
+
+# Exemple de recomanacions per l'usuari 1
+recomanacions = recomana_items(dataset.iloc[0]['user_id'], model, train)
+print("Recomanacions:", recomanacions)
+
+
