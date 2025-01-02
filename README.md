@@ -5,11 +5,11 @@
 # Objectius primera sessió:
 1. Descarregar DATASET
 2. STARTING POINT:
-    -Analitzar dataset, columnes, files...
-    -Filtrar Dataset:
-        -Encarregar-se de columnes problemàtiques o confuses
-        -Valors NULL o 0
-        -Considerar Normalitzar valors.
+    - Analitzar dataset, columnes, files...
+    - Filtrar Dataset:
+        - Encarregar-se de columnes problemàtiques o confuses
+        - Valors NULL o 0
+        - Considerar Normalitzar valors.
 
 3. Analitzar i processar diferents divisions del dataset en conjunts de test, train i validació
 4. Si hi ha temps, començar a entrenar diferents models amb el dataset.
