@@ -36,14 +36,14 @@
    - 1500 files
 
     ## Dubtes:
-    0. Podem importar els models de llibreries o s'ha de programar?
-    1. Hem d'agafar un subset? Masses cel·les. Hem de treballar amb tot el dataset? 
-    2. És necessari fer Cross Validation?
-    3. Quins són les millors mesures de similaritat?
-    4. Quins són els millors recomanadors?
-    5. Entenc que amb el dataset que tenim, no podem fer CB?
-    6. Quins mètodes són més representatius per Evaluar els models?
-    7. Com podem comprovar que les recomanacions que fa el nostre sistema avaluador són correctes?
+    1. Podem importar els models de llibreries o s'ha de programar?
+    2. Hem d'agafar un subset? Masses cel·les. Hem de treballar amb tot el dataset? 
+    3. És necessari fer Cross Validation?
+    4. Quins són les millors mesures de similaritat?
+    5. Quins són els millors recomanadors?
+    6. Entenc que amb el dataset que tenim, no podem fer CB?
+    7. Quins mètodes són més representatius per Evaluar els models?
+    8. Com podem comprovar que les recomanacions que fa el nostre sistema avaluador són correctes?
 
 # Objectius quarta sessió:
 1. Començar a preparar la presentació.
