@@ -1,0 +1,49 @@
+OBJECTIUS PER LA SESSIÓ 2:
+
+1. Descarregar dataset
+2. Analitzar dataset, columnes, files...
+3. Filtrar dataset, comprovar si hi ha columnes o valors problemàtics en el dataset.
+4. Reduir el tamany del dataset
+
+(Si hi ha temps) Començar a entrenar diferents models de recomanació.
+    -Separar el dataset en conjunts de test, train i validació
+
+Models a entrenar:
+-User-to-User
+-Item-to-Item
+-SVD
+
+Distàncies:
+-Correlació de Pearson
+-Distància cosinus
+
+Quantitat de dades dataset:
+    -1/3 d'usuaris o items
+    -2/3 usuaris o items
+    -La totalitat d'usuaris o items.
+
+Documentació pendent a redactar:
+Introducció explicant primer contacte amb el dataset.
+Explicar com hem netejat el dataset per poder treballar amb ell. (Eliminació de valors conflictius, filtratge d'elements per reduir la complexitat...)
+
+OBJECTIUS PER LA SESSIÓ 3 (no hi ha classe presencial) i 4:
+
+-Determinar quins són els paràmetres ideals per cada model recomanador. (distància, numero de veïns, factors latents...)
+-Per cada model, analitzar els resultats obtinugts d'aplicar cada model (amb els paràmetres seleccionats) al nostre dataset.
+-Buscar com poder comparar els diferents models.
+-Comprovar l'escalabilitat del nostre model (cost computacional...) (Si hi ha temps)
+-Acabar les comparacions amb diferents tamanys dataset.
+-Plantejat material visual per Presentació i Guió.
+-Informe explicatiu.
+
+CONTINGUT PRESENT A LA PRESENTACIÓ:
+
+-Breu explicació estudi previ DATASET, incloure filtratge posterior basat en starting point.
+-Explicació dels tres models que hem analitzat (User-to-User, Item-to-Item i SVD)
+Per la tria d'hiperparàmetres cal explicar;
+    -Quina és la millor distància pels models User-to-User i Item-to-Item (pearson o cosinus)
+    -Quin és el nombre de veins adequat pels models
+-Comparació dels models User-to-User vs Item-to-Item vs SVD, explicar resultats obtinguts i mostrat quin és millor.
+-Mencionar anàlisis realitzat amb cross validation.
+-Anàlisis per valoracions (error per valoracions 1.0 ...)
+

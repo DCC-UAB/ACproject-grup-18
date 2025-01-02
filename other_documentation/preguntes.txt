@@ -1,11 +1,24 @@
-1. Com carreguem el dataset, amb kaggle i similars o el posem al directori?
-2. Quan carreguem el dataset, quins són els criteris de filtratge?
-    De moment, borrem aquelles usuaris que hagin fet menys de 50 valoracions i aquells items que tinguin menys de 5 valoracions
-3. Hem d'agafar un subset? Masses cel·les. Hem de treballar amb tot el datset? 
-4. Hem de pujar el dataset al GitHub?
-5. És necessari fer Cross Validation?
-6. Quins són les millors mesures de similaritat?
-7. Quins són els millors recomanadors?
-8. Entenc que amb el dataset que tenim, no podem fer CB?
-9. Quins mètodes són més representatius per Evaluar els models?
-10. Com podem comprovar que les recomanacions que fa el nostre sistema avaluador són correctes?
+SESSIÓ 2:
+
+1. Quin tipus de dades conté el dataset? Com és el nostre dataset i que descriu? Quina és la seva mida inicial?
+2. Hi ha valors nulls o errònis?
+    No hi ha valors nulls o errònis en el dataset.
+3. Hi ha columnes redundants?
+4. Quina distribució tenen les nostres dades? Podem veure tendències?
+5. Una vegada carregat el dataset, hem de filtrat? Si és així, quins són els criteris?
+6. Cal pujar el dataset al GitHub?
+    No, ja que al ser un arxiu massa gran no es pot pujar directament al repositori, cal que cada membre el tingui descarregat.
+7. Quins models recomanadors podem aplicar per aquest dataset?
+
+SESSIÓ 3 i 4:
+
+1. Com dividim les dades?
+2. Quines són els millors paràmetres pel model User-to-User? I per l'Item-to-Item?
+3. Quina diferència hi ha entre la distància de Pearson i Cosinus?
+4. Pels models user i item analitzem el nombre de veïns, quin és l'equivalent per SVD?
+5. Com podem comparar els diferents models? Quines mètriques utilitzem?
+6. És l'error igual per tots les valoracions? O hi ha valoracions on els models s'equivoquen més?
+7. Són els temps d'execució dels models iguals o hi ha diferències?
+8. Què passa quan tenim menys dades, és a dir, quan reduïm el tamany del dataset amb el que treballem?
+9. Hi ha items o usuaris que coincideixen en les recomanacions? Quins són els items que més es recomanen per cada model?
+10. Aplicar la tècnica de cross-validation canvia els resultats?
