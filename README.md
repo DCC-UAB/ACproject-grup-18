@@ -52,16 +52,19 @@
    - Fer precisio recall. 
 
 ## Contingut presentació:
-Breu explicació estudi previ DATASET
-Menció dels tres models que explicarem
-User-User i item item grafica pearson cosinus --> Ens quedem amb la millor (serà la distància que utilitzarem per les altres gràfiques)
+- Breu explicació estudi previ DATASET
+- Menció dels tres models que explicarem
+- User-User i item item grafica pearson cosinus 
+    - Ens quedem amb la millor (serà la distància que utilitzarem per les altres gràfiques)
     son el mateix decidim quedar-nos amb cosinus.
-User-user vs Item-item --> Comparem entre ells i expliquem beneficis i contres de cada un.
-SVD --> cross validation. (Como no podemos ver la evolucion del model en función de k (vecinos), miramos con varios datasets).
-UvsIvsS --> comparem entre els tres. Principalment SVD contra les altres dues, ja que és la millor.
-Analitzem ratings --> expliquem perquè fallen més els ratings <= 3 {
-    Estaria guay explicar perquè 4 dona menys vegades error que no el 5
-}
+- User-user vs Item-item
+    - Comparem entre ells i expliquem beneficis i contres de cada un.
+- SVD 
+    - Cross validation. 
+- User-User vs Item-Item vs SVD 
+    - Comparem els tres. Principalment SVD contra les altres dues, ja que és la millor.
+- Analitzem ratings 
+    - Expliquem perquè fallen més els ratings <= 3 {Estaria guay explicar perquè 4 dona menys vegades error que no el 5}
 
 # Millores
 1. Mirar factors latents per el model SVD. 
