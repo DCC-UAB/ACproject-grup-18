@@ -22,28 +22,20 @@
     3. Es pot fer Content-Based?
 
 # Objectius segona i tercera (dia 6 desembre festiu) sessió:
-## 1. Models a entrenar:
+1. Models a entrenar:
    - User-to-User
    - Item-to-Item
    - SVD
-
-## 2. Distàncies a comparar amb els models User-User i Item-Item
+2. Distàncies a comparar amb els models User-User i Item-Item
    -  Correlació de Pearson
    -  Distància cosinus
 
-## 3. Quantitat dataset: (Les proves es poden fer per aquests diferents tamanys de dataset)
+3. Quantitat dataset: (Les proves es poden fer per aquests diferents tamanys de dataset)
    - 500 files
    - 1000 files
    - 1500 files
 
-
     ## Dubtes:
-    1. Com carreguem el dataset, amb kaggle i similars o el posem al directori?
-        - No s'ha de penjar al github, no es pot per espai.
-    2. Quan carreguem el dataset, quins són els criteris de filtratge?
-        - De moment, borrem aquelles usuaris que hagin fet menys de 50 valoracions i aquells items que tinguin menys de 5 valoracions.
-    3. Es pot fer Content-Based?
-## Dubtes:
     0. Podem importar els models de llibreries o s'ha de programar?
     1. Hem d'agafar un subset? Masses cel·les. Hem de treballar amb tot el dataset? 
     2. És necessari fer Cross Validation?
