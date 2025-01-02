@@ -36,23 +36,22 @@
    - 1000 files
    - 1500 files
 
+
     ## Dubtes:
+    1. Com carreguem el dataset, amb kaggle i similars o el posem al directori?
+        - No s'ha de penjar al github, no es pot per espai.
+    2. Quan carreguem el dataset, quins són els criteris de filtratge?
+        - De moment, borrem aquelles usuaris que hagin fet menys de 50 valoracions i aquells items que tinguin menys de 5 valoracions.
+    3. Es pot fer Content-Based?
+## Dubtes:
     0. Podem importar els models de llibreries o s'ha de programar?
-        - 
     1. Hem d'agafar un subset? Masses cel·les. Hem de treballar amb tot el dataset? 
-        - 
     2. És necessari fer Cross Validation?
-        - 
     3. Quins són les millors mesures de similaritat?
-        - 
     4. Quins són els millors recomanadors?
-        - 
     5. Entenc que amb el dataset que tenim, no podem fer CB?
-        - 
     6. Quins mètodes són més representatius per Evaluar els models?
-        - 
     7. Com podem comprovar que les recomanacions que fa el nostre sistema avaluador són correctes?
-        - 
 
 # Objectius quarta sessió:
 1. Començar a preparar la presentació.
