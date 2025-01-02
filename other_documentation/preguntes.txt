@@ -1,6 +1,6 @@
 1. Com carreguem el dataset, amb kaggle i similars o el posem al directori?
 2. Quan carreguem el dataset, quins són els criteris de filtratge?
-    De moment, borrem aquelles usuaris que hagin fet menys de 50 valoracions i aquells items que tinguin menys de 5 valoracions
+    Basant-nos en un starting point, borrem aquelles usuaris que hagin fet menys de 50 valoracions i aquells items que tinguin menys de 5 valoracions
 3. Hem d'agafar un subset? Masses cel·les. Hem de treballar amb tot el datset? 
 4. Hem de pujar el dataset al GitHub?
 5. És necessari fer Cross Validation?
@@ -9,3 +9,4 @@
 8. Entenc que amb el dataset que tenim, no podem fer CB?
 9. Quins mètodes són més representatius per Evaluar els models?
 10. Com podem comprovar que les recomanacions que fa el nostre sistema avaluador són correctes?
+
