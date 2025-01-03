@@ -20,7 +20,7 @@ Aquesta carpeta conté scripts de proves que es van fer durant les fases inicial
 - **`load_csv.py`**: Script per carregar i processar el dataset. Incloïa funcions de neteja inicial segons els criteris definits.
 
 ## **3. Altres arxius i carpetes**
-- **`.gitignore`**: Arxiu que defineix les rutes i extensions d’arxius que no s’han d’incloure en el control de versions (per exemple, el dataset descarregat localment).
+- **`.gitignore`**: Arxiu que defineix les rutes i extensions d’arxius que no s’han d’incloure en el control de versions (el dataset descarregat localment).
 - **`README.md`**: Arxiu principal del repositori que inclou informació bàsica sobre el projecte, instruccions per executar el codi, i una breu descripció dels objectius i resultats obtinguts.
 
 ---
@@ -45,11 +45,11 @@ Aquesta carpeta conté scripts de proves que es van fer durant les fases inicial
 # Objectius per la sessió 2:
 
 **Objectius generals:** Establir una base sòlida i robusta per al treball, definint de forma clara el problema i que esperem d'aquest estudi.
-1. Definició del problema:
-1. Descarregar dataset
-2. Analitzar dataset, columnes, files...
-3. Filtrar dataset, comprovar si hi ha columnes o valors problemàtics en el dataset.
-4. Reduir el tamany del dataset
+1. Definició del problema
+2. Descarregar dataset
+3. Analitzar dataset, columnes, files...
+4. Filtrar dataset, comprovar si hi ha columnes o valors problemàtics en el dataset.
+5. Reduir el tamany del dataset eliminant les dades irrellevants
 
 Començar a entrenar diferents models de recomanació.
     - Separar el dataset en conjunts de test, train
@@ -97,15 +97,22 @@ Començar a entrenar diferents models de recomanació.
     7. **Quins són els criteris de filtratge del dataset?**  
     - Eliminem aquells usuaris que hagin fet menys de 50 valoracions i aquells ítems que tinguin menys de 5 valoracions. Aquesta proposta s'ha extret dels starting point del dataset disponibles a Kaggle.
 
-    8. **Quina distribució tenen les nostres dades?**  
+    8. **Quin impacte té el nombre d’ítems amb poques valoracions en el rendiment del sistema?**  
+    - Els ítems amb poques valoracions generen soroll i dificulten la predicció de patrons robustos. Filtrar ítems amb menys de 5 valoracions assegura que el model se centri en dades rellevants.
+
+    9. **Quina distribució tenen les nostres dades?**  
     - En l'anàlisi inicial del dataset s'ha observat què només una petita fracció dels usuaris concentra una gran part de les valoracions fetes als productes. Passa el mateix amb els ítems, on una part d'aquests conté la gran majoria de les valoracions rebudes.
      Si analitzem la distribució de les valoracions fetes pels usuaris podem veure una tendència clara a les valoracions altes (5.0 i 4.0), en especial a la màxima valoracio (5.0). Hi ha poques valoracions baixes (1.0, 2.0 i 3.0)
 
-    9. **Cal pujar el dataset al GitHub?**  
+    10. **Cal pujar el dataset al GitHub?**  
     - No, ja que és massa gran per pujar-lo al repositori. Cada membre de l'equip l'ha descarregat localment per poder treballar.
 
-    10. **Quins models recomanadors podem aplicar?**  
-        - Explorarem diversos models recomanadors, incloent User-User, Item-Item, i mètodes basats en factorització matricial com SVD. Com s'ha s'ha comentat anteriorment, un model basat en contingut no té sentit amb aquest dataset.
+    11. **Quins models recomanadors podem aplicar?**  
+    - Explorarem diversos models recomanadors, incloent User-User, Item-Item, i mètodes basats en factorització matricial com SVD. Com s'ha s'ha comentat anteriorment, un model basat en contingut no té sentit amb aquest dataset.
+
+    12. **És suficient l’ús de mètriques com RMSE i MAE per avaluar els models?**
+    - Aquestes mètriques són útils per mesurar errors en les prediccions, però combinar-les amb mètriques com precisió i recall permet una anàlisi més completa del rendiment dels models, capturant la rellevància de les recomanacions.
+
 
 
 
@@ -132,51 +139,52 @@ Començar a entrenar diferents models de recomanació.
       - Graficar la Precision-Recall curve
    - Redactar un informe explicatiu amb les conclusions i els passos seguits.
 
+
     ## Dubtes:
     1. **Podem importar els models de llibreries o s'ha de programar?**  
-    - Aquesta és una consideració inicial clau.
+    - Aquesta és una consideració inicial clau. En un primer moment es van intentar programar les funcions per fer el càlcul de les prediccions i les recomanacions. Posteriorment a una de les reunions amb el professor es van trobar els models recomanadors ja programats en la llibrerie Surprise. Els models d'aquesta llibreria són els que s'han fet servir en el projecte.
 
     2. **Hem d'agafar un subset del dataset o treballar amb totes les dades?**  
     - Si el dataset és massa gran, caldrà considerar l'ús d'un subset.
 
     3. **És necessari fer Cross Validation?**  
-    - Ens assegura millors resultats
+    - Aplicar la tèncica de Cross-Validation ens permet treure el màxim profit de les nostres dades a l'hora d'entrenar i avaluar el model. Si basem els resultats obtinguts en una unica partició de test i train els resultats seran vàlids només per la partició estudiada. Si apliquem Cross-Validation podem garantir que els resultats seràn molt més robustos i consistents de cara a generalitzar per totes les dades. L'ús d'aquesta tècnica ens permetrà entendre millor el dataset i saber amb més fiabilitat quines són les diferències entre els models.
 
     4. **Quines són les millors mesures de similaritat?**  
-    - Comparar mètodes com el coeficient de Pearson i el cosinus.
+    - Comparar mètodes com el coeficient de Pearson i el cosinus. La comparació d'aquestes mesures ens permetrà veure quina està funcionant millor per cada model quan treballem amb el nostre dataset. Després de fer l'analisi s'ha determinat que ambdues mesures són vàlides i les diferències entre aquestes no són significatives. S'ha decidit treballar amb la distància de Cosinus.
 
     5. **Quins són els millors recomanadors?**  
-    - Identificar els models més adequats per al dataset.
+    - Identificar els models més adequats per al dataset. Quin model s'està adaptant millor a les nostres dades? Quin model està cometent menys errors? Quin model està fent les millors prediccions?
+    S'ha fet l'analisi i comparació dels 3 models recomanadors i s'ha arribat a la conclusió del que el model que millor està funcionant amb aquest dataset és el model SVD. L'error en les prediccions és més petit que en els altres dos models i manté una precisió i un recall superiors.
 
     6. **Com dividir les dades?**  
-    - Decidir entre entrenament/test, validació, etc.
+    - S'ha optat per fer una divisió test train (80/20 respectivament).
 
     7. **Quines són els millors paràmetres pel model User-to-User i per l'Item-to-Item?**  
-    - Ajustar els paràmetres per maximitzar el rendiment.
+    - S'ha graficat l'evolució del l'error en funció del nombre de veins que es selecciona en cada sistema recomanador i s'ha determinat mitjançant el mètode del colze que en el model U-U Cosunis la k òptima és 5, en U-U Pearson k = 4, en I-I Cosunis k = 5 i en I-I Pearson k = 4. S'explica en detall en el document **`README_Informe.pdf`**.
 
     8. **Quina diferència hi ha entre la distància de Pearson i Cosinus?**  
-    - Analitzar els avantatges i inconvenients de cada mètrica.
+    - S'ha fet un anàlisi dels avantatges i inconvenients de les dues mètriques s'ha determinat quina de les dues funciona millor en el nostre conjunt de dades. S'explica en detall en el document **`README_Informe.pdf`**.
 
     9. **Quin és l'equivalent al nombre de veïns per SVD?**  
-    - Identificar el paràmetre equivalent en models de factorització matricial.
+    - Identificar el paràmetre equivalent en models de factorització matricial, si és que hi ha algun.
 
     10. **Com podem comparar els diferents models? Quines mètriques utilitzem?**  
-        - Proposar mètriques com RMSE, MAE, precisió, i record.
+        - Per comparar els errors en les prediccions dels models es faran servir el RMSE (Rood Mean Squared Error) i el MAE (Mean Absolute Error).
+        - Per veure l'encert en les prediccions mirarem com evolucionen la precisió i el recall en funció del nombre d'ítems que recomanem.
+        - Es pot fer la precision-recall curve per veure com evoluciona la precisió dels models a mesura que creix el recall.
 
     11. **És l'error igual per totes les valoracions?**  
-        - Identificar si els models fallen més en algunes condicions.
+        - Identificar si els models fallen més en algunes condicions. És possible que el desbalanceig que vam observar en les valoracions en fer l'anàlisi del dataset (tendència avaloracions altes) estigui fent que els models tendeixin a predir valors alts? S'ha de veure si l'error de predicció de cada recomanador és igual en funció de quines són les valoracions reals fetes pels usuaris.
 
     12. **Hi ha diferències en els temps d'execució dels models?**  
-        - Comparar la complexitat computacional entre els models.
+        - Comparar la complexitat computacional entre els models. Es poden fer gràfiques per comparar el temps que triga a executar-se cada model recomanador i així veure quins són els més costosos a nivell computaciona.
 
     13. **Què passa quan treballem amb menys dades?**  
-        - Analitzar l'impacte de reduir la mida del dataset en el rendiment.
+        - Analitzar l'impacte de reduir la mida del dataset en el rendiment. Com afecta això als resultats obtinguts?
 
     14. **Hi ha ítems o usuaris que coincideixen en les recomanacions?**  
-        - Identificar quins ítems són més recomanats per cada model.
-
-    15. **Aplicar la tècnica de Cross-Validation canvia els resultats?**  
-        - Avaluar l'efecte de la validació creuada en els resultats finals.
+        - Identificar quins ítems són més recomanats per cada model. S'han agafat les recomanacions fetes als usuaris i s'ha comprovat si hi ha certs ítems que apareixen recomanats amb més freqüència. En efecte, hi ha ítems que apareixen molt més que altres entre les recomanacions. Aquests ítems coincideixen amb els ítems més avaluats del dataset.
 
 
 ## Contingut de la Presentació
@@ -203,7 +211,7 @@ Començar a entrenar diferents models de recomanació.
    - Error per tipus de valoració (per exemple, error en valoracions 1.0 vs altres).  
    - Observacions i conclusions sobre els casos en què els models fallen més.
 
-### 5. **Anàlisi dels Errors**  
+### 6. **Conclusions**  
    - Exposar les conclusions
 
 # Millores posteriors a la presentació
